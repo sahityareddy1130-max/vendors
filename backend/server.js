@@ -6,12 +6,7 @@ const app = express();
 
 // CORS middleware
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://your-frontend.netlify.app',
-    'https://your-frontend.vercel.app'
-  ],
-  credentials: true,
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
