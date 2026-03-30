@@ -1,4 +1,5 @@
 {
+  "homepage": ".",
   "name": "local-vendor-website-builder-frontend",
   "private": true,
   "version": "1.0.0",
