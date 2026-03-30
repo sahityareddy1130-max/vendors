@@ -4,7 +4,7 @@ import categories from '../data/categories';
 import templateOptions from '../data/templateOptions';
 import ThreeBackground from '../components/ThreeBackground';
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000/api/vendors';
+const backendUrl = 'https://vendors-backend-x80v.onrender.com/api/vendors';
 
 function VendorFormPage() {
   const navigate = useNavigate();
