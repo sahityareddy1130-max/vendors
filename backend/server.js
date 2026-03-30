@@ -8,10 +8,12 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://your-frontend.netlify.app', // Replace with your actual Netlify URL
-    'https://your-frontend.vercel.app' // Add your Vercel frontend URL here
+    'https://your-frontend.netlify.app',
+    'https://your-frontend.vercel.app'
   ],
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 // Body parser middleware

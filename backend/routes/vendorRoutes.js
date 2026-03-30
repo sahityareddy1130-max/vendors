@@ -26,19 +26,17 @@ const slugify = (value) => {
     .replace(/^-+|-+$/g, '');
 };
 
-// POST /api/vendors - Create a new vendor
-router.post('/', (req, res) => {
-  console.log('POST /api/vendors called');
-  const { shopName, description, phone, address, category, template, imageUrl } = req.body;
+const multer = require('multer');
+const upload = multer();
 
+// POST /api/vendors - Create a new vendor (supports FormData)
+router.post('/', upload.none(), (req, res) => {
+  const { shopName, description, phone, address, category, template } = req.body;
   if (!shopName || !description || !phone || !address || !category || !template) {
-    console.log('Missing required fields');
     return res.status(400).json({ message: 'Please fill all required fields.' });
   }
-
   const shopSlug = slugify(shopName);
   const vendors = readVendors();
-
   const newVendor = {
     id: Date.now(),
     shopName,
@@ -47,16 +45,13 @@ router.post('/', (req, res) => {
     address,
     category,
     template,
-    imageUrl: imageUrl || '',
+    imageUrl: '',
     shopSlug,
     createdAt: new Date().toISOString(),
   };
-
   const filtered = vendors.filter((vendor) => vendor.shopSlug !== shopSlug);
   filtered.push(newVendor);
   saveVendors(filtered);
-
-  console.log('Vendor created:', newVendor);
   res.status(201).json(newVendor);
 });
 
