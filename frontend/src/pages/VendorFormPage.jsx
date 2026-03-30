@@ -68,21 +68,21 @@ function VendorFormPage() {
       setImageUrl(finalImageUrl);
     }
 
-    const body = {
-      shopName,
-      description,
-      phone,
-      address,
-      category,
-      template,
-      imageUrl: finalImageUrl || '',
-    };
+    const formData = new FormData();
+    formData.append('shopName', shopName);
+    formData.append('description', description);
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('category', category);
+    formData.append('template', template);
+    if (selectedFile) {
+      formData.append('image', selectedFile);
+    }
 
     try {
       const response = await fetch(backendUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: formData
       });
 
       if (!response.ok) {
@@ -94,9 +94,6 @@ function VendorFormPage() {
       }
 
       const data = await response.json();
-      if (finalImageUrl) {
-        localStorage.setItem('shopImage', finalImageUrl);
-      }
       navigate(`/vendor/${encodeURIComponent(data.shopSlug)}`);
     } catch (error) {
       setStatus(`Failed to submit: ${error.message}`);
