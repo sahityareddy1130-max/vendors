@@ -60,6 +60,12 @@ router.post('/', (req, res) => {
   res.status(201).json(newVendor);
 });
 
+// GET /api/vendors - Get all vendors
+router.get('/', (req, res) => {
+  const vendors = readVendors();
+  res.json(vendors);
+});
+
 // GET /api/vendors/:shopSlug - Get a vendor by slug
 router.get('/:shopSlug', (req, res) => {
   const shopSlug = req.params.shopSlug;
