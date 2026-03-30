@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import QRCode from 'qrcode';
 import templateMap from '../components/templates/templateMap';
 
-const backendUrl = 'https://vendors-backend-x80v.onrender.com/api/vendors';
+const BASE_URL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:5000'
+    : 'https://vendors-backend-x80v.onrender.com';
+const backendUrl = `${BASE_URL}/api/vendors`;
 
 function VendorLandingPage() {
   const { shopname } = useParams();
