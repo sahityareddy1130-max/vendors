@@ -8,7 +8,8 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://your-frontend.netlify.app' // Replace with your actual Netlify URL
+    'https://your-frontend.netlify.app', // Replace with your actual Netlify URL
+    'https://your-frontend.vercel.app' // Add your Vercel frontend URL here
   ],
   credentials: true,
 }));
